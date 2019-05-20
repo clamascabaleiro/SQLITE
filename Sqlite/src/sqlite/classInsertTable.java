@@ -19,10 +19,10 @@ public class classInsertTable {
         }
         return conn;
     }
- 
+        
     public void insert(int numero, String nombre, float nota) {
         String sql = "INSERT INTO dam1(nº ,nombre, nota) VALUES(?,?,?)";
- 
+        //Insertamos los registros en la tabla
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, numero);

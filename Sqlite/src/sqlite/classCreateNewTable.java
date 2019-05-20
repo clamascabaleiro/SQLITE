@@ -11,7 +11,7 @@ public class classCreateNewTable {
     public static void newTable(){
       String url = "jdbc:sqlite:alumno.db";
         
-        // SQL statement for creating a new table
+        // SQL statement para crear una nueva tabla
         String sql = "CREATE TABLE IF NOT EXISTS dam1 (\n"
                 + "	nº integer PRIMARY KEY,\n"
                 + "	nombre text NOT NULL,\n"
@@ -20,7 +20,7 @@ public class classCreateNewTable {
         
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
-            // create a new table
+            // Creamos la tabla nueva
             stmt.execute(sql);
             System.out.println("Tabla creada correctamente");
         } catch (SQLException e) {
