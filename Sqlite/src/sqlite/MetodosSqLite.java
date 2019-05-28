@@ -1,6 +1,7 @@
 package sqlite;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import javax.swing.JOptionPane;
  * @author clamascabaleiro
  */
 public class MetodosSqLite {
-
     /**
      * Este método sirve para conectar con la base de datos
      *
@@ -105,21 +105,21 @@ public class MetodosSqLite {
          /**
      * Método para modicar el nombre y nota de la tabla dam1
      * @param numeroAlum
-     * @param nombreAlum
+     * @param nombre
      * @param notaAlum 
      */
         
-        public void modificarAlumno(int numeroAlum,String nombreAlum, float notaAlum) {
-        String sql = "UPDATE dam1 SET nombreAlum = ? , "
+        public void modificarAlumno(int nº,String nombre, float nota) {
+        String sql = "UPDATE dam1 SET nombre = ? , "
                 + "nota = ? "
                 + "WHERE nº = ?";
         try (Connection conn = this.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, numeroAlum);
-            pstmt.setString(2, nombreAlum);
-            pstmt.setFloat(3, notaAlum);
+            pstmt.setString(1, nombre);
+            pstmt.setFloat(2, nota);
+             pstmt.setInt(3, nº);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente modificado correctamente");
+            JOptionPane.showMessageDialog(null, "Alumno modificado correctamente");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -132,7 +132,7 @@ public class MetodosSqLite {
 
     public String devolverAlumno(int nºAlumno) {
         String sql = "SELECT nº,nombre,nota"
-                + " FROM clientes WHERE nº=?";
+                + " FROM dam1 WHERE nº=?";
         String resultado = "";
         try (Connection conn = this.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -141,7 +141,7 @@ public class MetodosSqLite {
             while (rs.next()) {
                 resultado = (rs.getInt("nº") + ","
                         + rs.getString("nombre") + ","
-                        + rs.getInt("nota"));
+                        + rs.getFloat("nota"));
             }
             return resultado;
         } catch (SQLException e) {
@@ -169,7 +169,7 @@ public class MetodosSqLite {
             while (rs.next()) {
                 alumnos.add(rs.getInt("nº") + ","
                         + rs.getString("nombre") + ","
-                        + rs.getInt("nota"));
+                        + rs.getFloat("nota"));
             }
             return alumnos;
         } catch (SQLException e) {
