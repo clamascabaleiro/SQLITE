@@ -96,9 +96,9 @@ public class MetodosSqLite {
                 pstmt.setString(2, nombreAlum);
                 pstmt.setFloat(3, notaAlum);
                 pstmt.executeUpdate();
-                System.out.println("Insertado");
+               JOptionPane.showMessageDialog(null,"Alumno insertado");
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null,"Registro no insertado no encuentra la tabla");
+                JOptionPane.showMessageDialog(null,"El id ya existe");
             }
         }
         
@@ -159,7 +159,6 @@ public class MetodosSqLite {
      */
 
     public ArrayList<String> consultaAlumno(String campo, Object valor) {
-        System.out.println("campo = " + campo + " valor = " + valor);
         ArrayList<String> alumnos = new ArrayList<>();
         String sql = "SELECT nº,nombre,nota"
                 + " FROM dam1 WHERE " + campo + " = ?";

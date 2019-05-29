@@ -48,6 +48,7 @@ public class BD extends javax.swing.JFrame {
             for (int i = 0; filas > i; i++) {
                 modelo.removeRow(0);
             }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
         }
@@ -322,10 +323,10 @@ public class BD extends javax.swing.JFrame {
 
         if(fila == -1){
             m.insertDam1(nº, nombre, nota);
-           JOptionPane.showMessageDialog(null,"Alumno añadido");
+         
         }
         else{
-            JOptionPane.showMessageDialog(null,"Error al añadir el alumno o puede que el id ya exista");
+            
         }
     }//GEN-LAST:event_bInsertarActionPerformed
 
