@@ -96,7 +96,7 @@ public class MetodosSqLite {
                 pstmt.setString(2, nombreAlum);
                 pstmt.setFloat(3, notaAlum);
                 pstmt.executeUpdate();
-                JOptionPane.showMessageDialog(null,"Insertado");
+                System.out.println("Insertado");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,"Registro no insertado no encuentra la tabla");
             }
@@ -130,13 +130,13 @@ public class MetodosSqLite {
      * @return 
      */
 
-    public String devolverAlumno(int nºAlumno) {
+    public String devolverAlumno(int nº) {
         String sql = "SELECT nº,nombre,nota"
                 + " FROM dam1 WHERE nº=?";
         String resultado = "";
         try (Connection conn = this.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, nºAlumno);
+            pstmt.setInt(1, nº);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 resultado = (rs.getInt("nº") + ","
@@ -159,9 +159,10 @@ public class MetodosSqLite {
      */
 
     public ArrayList<String> consultaAlumno(String campo, Object valor) {
+        System.out.println("campo = " + campo + " valor = " + valor);
         ArrayList<String> alumnos = new ArrayList<>();
         String sql = "SELECT nº,nombre,nota"
-                + " FROM dam1 WHERE " + campo + "=?";
+                + " FROM dam1 WHERE " + campo + " = ?";
         try (Connection conn = this.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setObject(1, valor);
